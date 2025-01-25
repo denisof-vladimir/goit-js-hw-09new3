@@ -28,11 +28,15 @@ const FieldChange = event =>{
 }
 
 const OnFormSubmit = event => {
-    console.log(FormData);
-    event.preventDefault();
-    feedbackFormEl.reset();   
-    localStorage.removeItem('feedback-form-state');
-};
+    console.log("FormData-", FormData);
+    if (FormData.email.length ==0 || FormData.message.length ==0) {
+        console.log("Fill please all fields");    }
+    else {
+        event.preventDefault();
+        feedbackFormEl.reset();   
+        localStorage.removeItem('feedback-form-state');
+        }
+    };
 
 feedbackFormEl.addEventListener('input', FieldChange);
 feedbackFormEl.addEventListener('submit', OnFormSubmit);
