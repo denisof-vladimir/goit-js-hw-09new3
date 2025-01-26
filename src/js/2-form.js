@@ -8,10 +8,9 @@ let FormData ={
 
 const FillFormFields = () => {
     try {
-        if (localStorage.length == 0) {
-            return;
-        }
-        const FormDataFromLS = JSON.parse(localStorage.getItem('feedback-form-state')) ;       
+        if (localStorage.length == 0) { return;  }
+        const FormDataFromLS = JSON.parse(localStorage.getItem('feedback-form-state')) ;  
+        if (FormDataFromLS === null) { return;}     
         FormData = FormDataFromLS;
         for (const key in FormDataFromLS) {
             feedbackFormEl.elements[key].value = FormDataFromLS[key];
@@ -33,7 +32,9 @@ const OnFormSubmit = event => {
     else {
         console.log(FormData);
         event.preventDefault();
-        feedbackFormEl.reset();   
+        feedbackFormEl.reset(); 
+        FormData.email = '';
+        FormData.message = '';   
         localStorage.removeItem('feedback-form-state');
         }
     };
